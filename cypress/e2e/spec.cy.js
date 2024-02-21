@@ -5,29 +5,32 @@ describe('oscommerce', () => {
         $elemento.click();
       } else {
         cy.get('button.slick-next.slick-arrow').click().then(() => {
-          buscarElemento(); // Llamada recursiva
+          buscarElemento(item); // Llamada recursiva
         });
       }
     });
   }
+  
   it('passes', () => {
-    //const item='Citizen Eco-Drive Silver Tone Men';
-    const item='Royal London 41003-03';
+    const isFirefox =Cypress.browser.name === 'firefox';
+    const item = isFirefox ? Cypress.env('firefoxItem') : Cypress.env('chromeItem');
+    const qtyValue = isFirefox ? Cypress.env('firefoxQty') : Cypress.env('chromeQty');
+    
     let encontrado = false;
     cy.visit('https://sqademosatp.net/watch');
-    
-    
     
     buscarElemento(item);
     cy.get(`a:contains("${item}")`).invoke('attr', 'href').then((href) => {
       // Verifica que el href no sea nulo
       // Visita la URL obtenida del enlace
-      cy.visit(href); });
-      cy.get('input#qty').clear().type('2');
-      cy.get('button.btn-2.add-to-cart').click();
-      cy.get('.right-buttons > .btn-2').click();
-      cy.get('a.btn-2.btn-to-checkout').click();
-      cy.get('#shipping_address-firstname').clear();
+      cy.visit(href);
+    });
+    
+    cy.get('input#qty').clear().type(qtyValue);
+    cy.get('button.btn-2.add-to-cart').click();
+    cy.get('.right-buttons > .btn-2').click();
+    cy.get('a.btn-2.btn-to-checkout').click();
+    cy.get('#shipping_address-firstname').clear();
 
     // Escribir "luis" en el campo
     cy.get('#shipping_address-firstname').type('luis');
@@ -55,6 +58,6 @@ describe('oscommerce', () => {
     cy.get('input[type="radio"][value="cod"]').check();
     cy.contains('Confirm and pay').click();
     cy.get('div.text-2').should('contain', "We've received your order");
-   
-  })
+  });
 });
+
