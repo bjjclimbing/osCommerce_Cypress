@@ -7,11 +7,12 @@ module.exports = defineConfig({
     firefoxQty: "3",
     chromeQty: "2",
   },
+  videosFolder: 'cypress/video',
   video: true,
-  videoUploadOnPasses: false,
   videoCompression: 32,
-  videoUploadOnFailures: true,
-  videosFolder: "cypress/videos",
+  screenshotsFolder: 'cypress/screenshots',
+  screenshotsOnRunFailure: true,
+
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
