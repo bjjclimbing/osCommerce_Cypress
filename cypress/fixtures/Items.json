@@ -1,0 +1,9 @@
+{
+  "tc1Item": "Royal London 41003-03",
+  "tc1Qty": "2",
+  "tc1_2AssertionString":"We've received your order",
+  "tc2Item": "Citizen Eco-Drive Silver Tone Men",
+  "tc2Qty": "3",
+  "tc3AssertionString":"Your order has processed",
+  "body": "Fixtures are a great way to mock data for responses to routes"
+}
